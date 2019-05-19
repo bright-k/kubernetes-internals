@@ -1,6 +1,6 @@
 # Kubernetes Internals (K8S 해부하기)
 
-* [Kubernetes Design And Architecture Overview](Kubernetes_Design_and_Architecture.md)
+* [Understanding Kubernetes Architecture](Understanding_Kubernetes_Architecture.md)
 * [Understanding API Server](Understanding_API_Server.md)
 * [Understanding Controller](Understanding_Controller.md)
 * [Understanding Scheduler](Understanding_Scheduler.md)

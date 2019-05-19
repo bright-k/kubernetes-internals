@@ -46,7 +46,7 @@ spec:
 
 $ systemctl restart kubelet
 ```
-도
+
 ```
 $ curl --http1.0 http://localhost:8080/api/v1/pods?watch=true
 
