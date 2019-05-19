@@ -3,6 +3,7 @@
 - [Kubernetes Design and Architecture](#kubernetes-design-and-architecture)
   - [Overview](#overview)
   - [Goals](#goals)
+  - [System Layers](#system-layers)
   - [Architecture](#architecture)
     - [Cluster Control Plane](#cluster-control-plane)
       - [API Server](#api-server)
@@ -16,7 +17,7 @@
     - [Add-ons](#add-ons)
 
 ## Overview
-* Kubernetes는 컨테이너의 배포, 확장, 관리 및 구성을위한 프로덕션 급의 오픈 소스 인프라
+* Kubernetes는 컨테이너의 배포, 확장, 관리 및 구성을 위한 프로덕션 급의 오픈 소스 인프라
 
 ## Goals
 1. Portable.
@@ -34,8 +35,34 @@
 7. Advanced the state art.
    * non-cloud-native를 지원하지만, cloud-native, DevOps의 기술의 발전에도 기여. Container Runtime, Cloud Provider 등에 종속되지 않음.
 
+## System Layers
+
+* Nucleus Layer
+  * kubernetes를 구성하는 기본 기능을 제공.
+  * Pod, Container Interface, Network Interface, Storage Volume Management 등을 제공.
+  * 해당 영역은 선택 사항이 아니고, 가장 안정적으로 제공되어야 하는 영역.
+* Application Layer
+  * 기본적인 배포와 라우팅을 제공.
+  * self-healing, scaling, service discovery, load balancing, traffic routing등을 제공.
+  * 기본 기능이 이미 제공되지만, 대체 가능.
+* Governance Layer
+  * 고수준의 자동화 및 정책을 제공.
+  * metrics, autoscaling, autorization, quota, network, storage policy 등을 제공.
+  * 선택적이며 다른 솔루션을 통해서도 제공 가능.
+* Interface Layer
+  * Kubernetes API와 상호 작용하는데 사용되는 Library, Tools, UI등을 포함.
+* Ecosystem
+  * Kubernetes 관련된 모든 것을 포함하지만, Kubernetes의 일부는 아님.
+  * CI/CD, logging, monitoring, PaaS, FaaS, Container Runtime, Cloud Provider...
+
+<img src="./images/system-layer1.png" />
+
+<img src="./images/system-layer2.png" />
+
 ## Architecture
-* Kubernetes 클러스터에는 노드 에이전트 (kubelet)와 클러스터 제어 플레인 (AKA 마스터)이 있으며 클러스터 상태는 분산 저장 시스템 (etcd)으로 백업됩니다.
+* Kubernetes 클러스터에는 노드 에이전트 (kubelet)와 클러스터 제어 플레인이 있으며 클러스터 상태는 분산 저장 시스템 (etcd)으로 백업.
+
+<img src="./images/architecture-01.png" />
 
 ### Cluster Control Plane
 * Kubernetes는 Control Plane의 허브 역할을하는 대부분의 리소스에 대한 CRUD 작업을 지원하는 REST API를 제공.
@@ -52,7 +79,7 @@
 * watch interface를 사용하여 변경사항을 신속하게 전파.
 
 #### Controller-Manager Server
-* 대부분의 클러스터 레벨의 기능은 Controller-Manager에서 별도의 프로세스로 동작
+* 대부분의 클러스터 레벨의 기능은 Controller-Manager에서 별도의 프로세스로 동작
 * 쉽게 확장 및 대체될 수 있음.
 
 #### Scheduler
