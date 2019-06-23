@@ -2,6 +2,7 @@
 
 * [Understanding Kubernetes Architecture](Understanding_Kubernetes_Architecture.md)
 * [Understanding API Server](Understanding_API_Server.md)
+* [Understanding etcd](Understanding_etcd.md)
 * [Understanding Controller](Understanding_Controller.md)
 * [Understanding Scheduler](Understanding_Scheduler.md)
 * [Understanding Kubelet](Understanding_Kubelet.md)
